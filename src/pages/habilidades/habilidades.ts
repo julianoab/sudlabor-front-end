@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HabilidadeService } from '../../services/domain/habilidade.service';
 
 /**
  * Generated class for the HabilidadesPage page.
@@ -15,11 +16,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HabilidadesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public habilidadeService: HabilidadeService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HabilidadesPage');
+    this.habilidadeService.findAll()
+    .subscribe(response => {
+      console.log(response);
+    },
+   error => {
+      console.log(error);
+   });
+   
   }
 
 }
